@@ -1,3 +1,5 @@
+
+
 import styles from "@/app/ui/dashboard/products/singleProduct/singleProduct.module.css";
 import Image from "next/image";
 
@@ -23,22 +25,19 @@ const SingleProductPage = () => {
           <label>Size</label>
           <textarea type="text" name="size" placeholder="small" />
           <label>Category</label>
-          <select name="isAdmin" id="isAdmin">
-            <option value={false}>Is Admin?</option>
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
+          <select name="category" id="category">
+            <option value="kitchen">Kitchen</option>
+            <option value="computers">Computers</option>
           </select>
-          <label>Is Active?</label>
-          <select name="isActive" id="isActive">
-            <option value={true}>Is Active?</option>
-            <option value={true}>Yes</option>
-            <option value={false}>No</option>
-          </select>
+          <label>Description</label>
+          <textarea 
+            name="desc"
+            id="desc"
+            rows="10"
+            placeholder="desc"
+          ></textarea>
           <button className={styles.button}>Update</button>
-
         </form>
-
-
       </div>
     </div>
   );
