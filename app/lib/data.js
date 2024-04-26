@@ -1,13 +1,14 @@
 import { User } from "./models";
 import { connectToDB } from "./utils";
 
-export const fetchUsers = async (query) => {
-  console.log(query);
-
+export const fetchUsers = async (query, page) => {
   const regex = new RegExp(query, "i")
+
+  const ITEM_PER_PAGE = 2;
+
   try {
     connectToDB();
-    const users = await User.find({ username:{$regex: regex} });
+    const users = await User.find({ username:{$regex: regex} }).limit(ITEM_PER_PAGE).skip(ITEM_PER_PAGE * (page - 1));
     return users
   } catch(err) {
     console.log(err)

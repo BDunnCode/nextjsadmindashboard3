@@ -7,9 +7,9 @@ import Link from "next/link";
 
 const UserPage = async ({searchParams}) => {
   const query = searchParams?.query || "";
-  const users = await fetchUsers(query);
+  const page = searchParams?.page || 1;
+  const users = await fetchUsers(query, page);
 
-  console.log(users);
   return (
     <div className={styles.container}>
       <div className={styles.top}>
