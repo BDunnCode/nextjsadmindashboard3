@@ -8,7 +8,7 @@ import Link from "next/link";
 const UserPage = async ({searchParams}) => {
   const query = searchParams?.query || "";
   const page = searchParams?.page || 1;
-  const users = await fetchUsers(query, page);
+  const {count, users} = await fetchUsers(query, page);
 
   return (
     <div className={styles.container}>
@@ -58,7 +58,7 @@ const UserPage = async ({searchParams}) => {
           ))}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination count={count} />
     </div>
   );
 };
