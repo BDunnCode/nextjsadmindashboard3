@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 
 export const connectToDB = async () => {
 
-  connection = {}
+  const connection = {}
 
   try {
     if (connection.isConnected) return;
