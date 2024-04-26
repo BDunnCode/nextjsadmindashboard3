@@ -2,18 +2,30 @@
 
 import { MdSearch } from "react-icons/md";
 import styles from "./search.module.css";
-import { usePathname, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const Search = ({ placeholder }) => {
   const searchParams = useSearchParams();
+  const { replace } = useRouter();
   const pathname = usePathname();
 
-  console.log(searchParams)
-  console.log(pathname)
+  const handleSearch = (e) => {
+    const params = new URLSearchParams(searchParams);
+    
+    if(e.target.value) {
+     e.target.value.length > 2 && params.set("query", e.target.value);
+    } else {
+      params.delete("query");
+    }
+
+    replace(`${pathname}?${params}`);
+  
+  };
+
   return (
     <div className={styles.container}>
       <MdSearch />
-      <input type="text" placeholder={placeholder} className={styles.input} />
+      <input type="text" placeholder={placeholder} className={styles.input} onChange={handleSearch} />
     </div>
   );
 };
