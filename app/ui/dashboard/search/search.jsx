@@ -1,7 +1,15 @@
+"use client";
+
 import { MdSearch } from "react-icons/md";
 import styles from "./search.module.css";
+import { usePathname, useSearchParams } from "next/navigation";
 
 const Search = ({ placeholder }) => {
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+
+  console.log(searchParams)
+  console.log(pathname)
   return (
     <div className={styles.container}>
       <MdSearch />
