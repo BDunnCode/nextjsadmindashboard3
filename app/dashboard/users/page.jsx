@@ -50,7 +50,7 @@ const UserPage = async ({searchParams}) => {
               <td>{user.isAdmin ? "Admin" : "Client"}</td>
               <td>{user.isActive ? "Active" : "Passive"}</td>
               <td className={styles.buttons}>
-                <Link href="/dashboard/users/test">
+                <Link href={`./users/${user.id}`}>
                   <button className={`${styles.button} ${styles.view}`}>View</button>
                 </Link>
                 <form action={deleteUser}>
