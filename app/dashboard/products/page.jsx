@@ -51,7 +51,7 @@ const ProductPage = async ( {searchParams} ) => {
               <td>{product.createdAt?.toString().slice(4,16)}</td>
               <td>{product.stock}</td>
               <td className={styles.buttons}>
-                <Link href="/dashboard/products/test">
+                <Link href={`/dashboard/products/${product.id}`}>
                   <button className={`${styles.button} ${styles.view}`}>View</button>
                 </Link>
                 <form action={deleteProduct}>

@@ -1,29 +1,35 @@
 
 
+import { fetchProductById } from "@/app/lib/data";
 import styles from "@/app/ui/dashboard/products/singleProduct/singleProduct.module.css";
 import Image from "next/image";
 
-const SingleProductPage = () => {
+const SingleProductPage = async ( { params }) => {
+  const { id } = params;
+  const product = await fetchProductById(id);
+
+  console.log(product);
+
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
         <div className={styles.imgContainer}>
-          <Image src="/noavatar.png" alt="" fill />
+          <Image src={product.img || "/noavatar.png"} alt="" fill />
         </div>
-        iPhone
+        {product.title}
       </div>
       <div className={styles.formContainer}>
         <form action="" className={styles.form}> 
           <label>Title</label>
-          <input type="text" name="username" placeholder="John Doe" />
+          <input type="text" name="username" placeholder={product.title} />
           <label>Price</label>
-          <input type="text" name="price" placeholder="$100" />
+          <input type="text" name="price" placeholder={product.price} />
           <label>Stock</label>
-          <input type="text" name="password" placeholder="23" />
+          <input type="text" name="password" placeholder={product.stock} />
           <label>Color</label>
-          <input type="text" name="color" placeholder="red" />
+          <input type="text" name="color" placeholder={product.color} />
           <label>Size</label>
-          <textarea type="text" name="size" placeholder="small" />
+          <textarea type="text" name="size" placeholder={product.size} />
           <label>Category</label>
           <select name="category" id="category">
             <option value="kitchen">Kitchen</option>
@@ -34,7 +40,7 @@ const SingleProductPage = () => {
             name="desc"
             id="desc"
             rows="10"
-            placeholder="desc"
+            placeholder={product.desc}
           ></textarea>
           <button className={styles.button}>Update</button>
         </form>

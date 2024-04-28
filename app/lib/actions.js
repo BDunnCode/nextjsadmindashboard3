@@ -6,6 +6,7 @@ import bcrypt from "bcrypt";
 
 export const addUser = async (formData) => { 
   "use server";
+  
   const { username, email, password, phone, address, isAdmin, isActive } = Object.fromEntries(formData);
 
   try {
@@ -29,6 +30,7 @@ export const addUser = async (formData) => {
 
 export const addProduct = async (formData) => { 
   "use server";
+
   const { title, price, stock, color, size, desc } = Object.fromEntries(formData);
 
   try {
@@ -50,6 +52,7 @@ export const addProduct = async (formData) => {
 
 export const deleteProduct = async (formData) => {
   "use server";
+
   const { id } = Object.fromEntries(formData);
 
   try {
@@ -65,6 +68,7 @@ export const deleteProduct = async (formData) => {
 
 export const deleteUser = async (formData) => {
   "use server";
+
   const { id } = Object.fromEntries(formData);
 
   try {
@@ -79,6 +83,8 @@ export const deleteUser = async (formData) => {
 };
 
 export const updateUser = async (formData) => {
+  "use server";
+
   const { id, username, email, password, phone, address, isAdmin, isActive } =
     Object.fromEntries(formData);
 
@@ -111,6 +117,8 @@ export const updateUser = async (formData) => {
 };
 
 export const updateProduct = async (formData) => {
+  "use server";
+
   const { id, title, desc, price, stock, color, size } =
     Object.fromEntries(formData);
 
