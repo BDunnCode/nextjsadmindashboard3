@@ -3,13 +3,12 @@ import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/products/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { searchParams } from "next/navigation";
 import { fetchProducts } from "@/app/lib/data";
 
-const ProductPage = async () => {
+const ProductPage = async ( {searchParams} ) => {
   const query = searchParams?.query || "";
   const page = searchParams?.page || 1;
-  const { products } = await fetchProducts(query, page);
+  const { count, products } = await fetchProducts(query, page);
   console.log(products)
 
   return (
@@ -60,7 +59,7 @@ const ProductPage = async () => {
           ))}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination count={count} />
     </div>
   );
 };
