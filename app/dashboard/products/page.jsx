@@ -3,13 +3,13 @@ import Search from "@/app/ui/dashboard/search/search";
 import styles from "@/app/ui/dashboard/products/products.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import { searchParams } from "next/navigation";
 import { fetchProducts } from "@/app/lib/data";
+import { deleteProduct } from "@/app/lib/actions";
 
-const ProductPage = async () => {
+const ProductPage = async ( {searchParams} ) => {
   const query = searchParams?.query || "";
   const page = searchParams?.page || 1;
-  const { products } = await fetchProducts(query, page);
+  const { count, products } = await fetchProducts(query, page);
   console.log(products)
 
   return (
@@ -48,19 +48,22 @@ const ProductPage = async () => {
               </td>
               <td>{product.desc}</td>
               <td>${product.price}</td>
-              <td>{product.createdAt?.toString().splice(4,16)}</td>
+              <td>{product.createdAt?.toString().slice(4,16)}</td>
               <td>{product.stock}</td>
               <td className={styles.buttons}>
-                <Link href="/dashboard/products/test">
+                <Link href={`/dashboard/products/${product.id}`}>
                   <button className={`${styles.button} ${styles.view}`}>View</button>
                 </Link>
+                <form action={deleteProduct}>
+                  <input type="hidden" name="id" value={product.id} />
                   <button className={`${styles.button} ${styles.delete}`}>Delete</button>
+                </form>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <Pagination />
+      <Pagination count={count} />
     </div>
   );
 };
