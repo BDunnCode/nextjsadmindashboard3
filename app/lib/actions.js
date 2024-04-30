@@ -1,8 +1,10 @@
+"use server";
 import { redirect } from "next/navigation";
 import { Product, User } from "./models";
 import { connectToDB } from "./utils";
 import { revalidatePath } from "next/cache";
 import bcrypt from "bcrypt";
+import { signIn } from "../auth";
 
 export const addUser = async (formData) => { 
   "use server";
@@ -148,3 +150,16 @@ export const updateProduct = async (formData) => {
   revalidatePath("/dashboard/products");
   redirect("/dashboard/products");
 };
+
+export const authenticate = async (formData) => {
+  "use server";
+
+  const {username, password} = Object.fromEntries(formData)
+  console.log(username, password)
+
+  try {
+    await signIn("credentials", { username, password });
+  } catch(err){
+    throw err
+  }
+}
